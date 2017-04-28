@@ -10,8 +10,8 @@ import Foundation
 
 class WeatherFetch {
     
-    private let openWeatherMapBaseURL = "http://api.openweathermap.org/data/2.5/boogity"
-    private let openWeatherMapAPIKey = "Y0URK3YG03SH3R3"
+    private let openWeatherMapBaseURL = "http://api.openweathermap.org/data/2.5/weather"
+    private let openWeatherMapAPIKey = "a050ed161a506852535855166ed4b695"
     
     func getWeather(city: String) {
         
@@ -27,11 +27,11 @@ class WeatherFetch {
                 // Server has returned an error
                 print("Error:\n\(error)")
             
-            else {
+            }else {
                 // Server has returned data
                 print("Raw data:\n\(data!)\n")
                 let dataString = String(data: data!, encoding: String.Encoding.utf8)
-                print("Human-readable data:\n\(data!)")
+                print("Human-readable data:\n\(dataString!)")
             }
         }
         dataTask.resume()
