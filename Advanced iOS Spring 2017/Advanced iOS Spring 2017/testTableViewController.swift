@@ -46,12 +46,20 @@ class testTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
 
-        cell.textLabel?.text = weatherArray[indexPath.row].city
-        cell.detailTextLabel?.text = String(weatherArray[indexPath.row].temperature)
+        /*cell.textLabel?.text = weatherArray[indexPath.row].city
+        cell.detailTextLabel?.text = String(weatherArray[indexPath.row].temperature)*/
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath) as? WeatherTableViewCell else{
+            fatalError("error")
+        }
+        
+        cell.CityLabel.text = weatherArray[indexPath.row].city
+        cell.TempLabel.text = String(weatherArray[indexPath.row].temperature)
+        
         return cell
     }
  
