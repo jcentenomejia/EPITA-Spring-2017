@@ -1,30 +1,39 @@
 //
-//  testTableViewController.swift
+//  TableView.swift
 //  Advanced iOS Spring 2017
 //
-//  Created by Guest User on 17/05/17.
+//  Created by vanessa vargas on 5/17/17.
 //  Copyright © 2017 ___AdvancediOS___. All rights reserved.
 //
 
 import UIKit
 
-class testTableViewController: UITableViewController {
+class TableView: UITableViewController {
 
-    var weatherArray = [Weather]()
-    
+ var weatherArray = [Weather]()
+  
+  @IBAction func unwindToWeatherList(sender: UIStoryboardSegue){
+    if let sourceViewController = sender.source as? AddCityController , let weather = sourceViewController.weather {
+      let newIndexPath = IndexPath(row: weatherArray.count, section: 0)
+      weatherArray.append(weather)
+      tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+  }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        weatherArray.append(Weather(city: "Paris",temperature: 28,picture: nil)!)
-        weatherArray.append(Weather(city: "Tegucigalpa",temperature: 30,picture: nil)!)
-        weatherArray.append(Weather(city: "Berlin",temperature: 20,picture: nil)!)
-        weatherArray.append(Weather(city: "Nice",temperature: 25,picture: nil)!)
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+      
+      weatherArray.append(Weather(city: "Berlin", temperature: 33, picture: nil)!)
+        weatherArray.append(Weather(city: "Paris", temperature: 666, picture: UIImage(named:"Paris"))!)
+        weatherArray.append(Weather(city: "Tegucigalpa", temperature: 30, picture: UIImage(named:"hn"))!)
+      weatherArray.append(Weather(city: "Prague", temperature: 27, picture: nil)!)
+      weatherArray.append(Weather(city: "Oruro", temperature: 11, picture: nil)!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,31 +44,27 @@ class testTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        // return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // return the number of rows
         return weatherArray.count
     }
 
-    
+  
+    // Re usage of cells
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell", for: indexPath) as?
+      WeatherTableViewCell else {
+        fatalError("error")
+      }
 
         // Configure the cell...
-
-        /*cell.textLabel?.text = weatherArray[indexPath.row].city
-        cell.detailTextLabel?.text = String(weatherArray[indexPath.row].temperature)*/
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath) as? WeatherTableViewCell else{
-            fatalError("error")
-        }
-        
-        cell.CityLabel.text = weatherArray[indexPath.row].city
-        cell.TempLabel.text = String(weatherArray[indexPath.row].temperature)
-        
+        cell.cityLabel.text = weatherArray[indexPath.row].city
+        cell.tempLabel.text = "\(weatherArray[indexPath.row].temperature)"
+        cell.imageContainer.image = weatherArray[indexPath.row].picture
         return cell
     }
  
