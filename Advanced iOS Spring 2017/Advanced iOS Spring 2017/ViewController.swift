@@ -22,11 +22,13 @@ class ViewController: UIViewController {
         weather.getWeather(city: "Berlin")
       */
       
-      let weather = Weather(city: "Berlin", temperature: 0, picture: nil)
+      let weather = Weather(city: "Paris", temperature: 0, picture: nil)
       cityLabel.text = weather!.city
         tempLabel.text = "\(weather!.temperature)"
       
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

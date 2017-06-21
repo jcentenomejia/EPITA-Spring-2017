@@ -2,7 +2,7 @@
 //  WeatherTableViewCell.swift
 //  Advanced iOS Spring 2017
 //
-//  Created by vanessa vargas on 5/24/17.
+//  Created by Jorge Centeno on 5/24/17.
 //  Copyright © 2017 ___AdvancediOS___. All rights reserved.
 //
 

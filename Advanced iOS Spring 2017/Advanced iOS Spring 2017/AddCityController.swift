@@ -2,7 +2,7 @@
 //  AddCityController.swift
 //  Advanced iOS Spring 2017
 //
-//  Created by vanessa vargas on 6/1/17.
+//  Created by Jorge Centeno on 6/1/17.
 //  Copyright © 2017 ___AdvancediOS___. All rights reserved.
 //
 
@@ -19,7 +19,7 @@ class AddCityController: UIViewController {
  
   var weather: Weather?
   
-  let array = ["hn","Paris","sun"]
+  let array = ["hn","paris","prague","berlin","sun","helsinki","cloudy","rain"]
   var randomIndex = 0
     
   @IBAction func cancelButton(_ sender: Any) {

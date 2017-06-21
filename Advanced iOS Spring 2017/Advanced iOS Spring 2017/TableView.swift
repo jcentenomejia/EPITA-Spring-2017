@@ -2,7 +2,7 @@
 //  TableView.swift
 //  Advanced iOS Spring 2017
 //
-//  Created by vanessa vargas on 5/17/17.
+//  Created by Jorge Centeno on 5/17/17.
 //  Copyright © 2017 ___AdvancediOS___. All rights reserved.
 //
 
@@ -29,11 +29,11 @@ class TableView: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
       
-      weatherArray.append(Weather(city: "Berlin", temperature: 33, picture: nil)!)
-        weatherArray.append(Weather(city: "Paris", temperature: 666, picture: UIImage(named:"Paris"))!)
+        weatherArray.append(Weather(city: "Berlin", temperature: 33, picture: UIImage(named:"berlin"))!)
+        weatherArray.append(Weather(city: "Paris", temperature: 35, picture: UIImage(named:"paris"))!)
         weatherArray.append(Weather(city: "Tegucigalpa", temperature: 30, picture: UIImage(named:"hn"))!)
-      weatherArray.append(Weather(city: "Prague", temperature: 27, picture: nil)!)
-      weatherArray.append(Weather(city: "Oruro", temperature: 11, picture: nil)!)
+      weatherArray.append(Weather(city: "Prague", temperature: 27, picture: UIImage(named:"prague"))!)
+      weatherArray.append(Weather(city: "Helsinki", temperature: 11, picture: UIImage(named:"helsinki"))!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,8 +67,29 @@ class TableView: UITableViewController {
         cell.imageContainer.image = weatherArray[indexPath.row].picture
         return cell
     }
- 
-
+    
+    var valueToPass:Weather!
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("row: \(indexPath.row)")
+        print("item> \(weatherArray[indexPath.row].city)")
+        
+        
+        valueToPass = weatherArray[indexPath.row]
+        performSegue(withIdentifier: "detailView", sender: self)
+       
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: Weather?){
+        
+        if (segue.identifier == "detailView") {
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destination as! WeatherViewController
+            // your new view controller should have property that will store passed value
+            viewController.passedValue = valueToPass
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
