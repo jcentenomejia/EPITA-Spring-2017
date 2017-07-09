@@ -71,21 +71,15 @@ class TableView: UITableViewController {
     var valueToPass:Weather!
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print("row: \(indexPath.row)")
-        print("item> \(weatherArray[indexPath.row].city)")
-        
-        
         valueToPass = weatherArray[indexPath.row]
         performSegue(withIdentifier: "detailView", sender: self)
        
     }
     
-    func prepareForSegue(segue: UIStoryboardSegue, sender: Weather?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "detailView") {
-            // initialize new view controller and cast it as your view controller
             let viewController = segue.destination as! WeatherViewController
-            // your new view controller should have property that will store passed value
             viewController.passedValue = valueToPass
         }
     }
